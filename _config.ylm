@@ -10,7 +10,7 @@ baseurl: "nitheeshdonepudi.17@gmail.com"
 url: "https://Nitheesh0217.github.io" # Update with your GitHub Pages URL
 
 # Theme Configuration (Jekyll Theme)
-theme: jekyll-theme-minimal # Alternative: jekyll-theme-cayman, jekyll-theme-modernist
+theme: jekyll-theme-cayman
 
 # Navigation Links (Add as needed)
 header_pages:

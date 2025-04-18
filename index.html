@@ -16,6 +16,8 @@
             --text-dark: #333333;
             --text-medium: #555555;
             --text-light: #777777;
+            --glass-bg: rgba(255,255,255,0.25);
+            --glass-blur: blur(16px);
         }
 
         * {
@@ -30,7 +32,8 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--mint-light), var(--teal-dark));
+            background: linear-gradient(135deg, var(--mint-light), var(--teal-dark)), url('./index_files/ben-kolde-bs2Ba7t69mM-unsplash.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: var(--text-dark);
             min-height: 100vh;
             position: relative;
@@ -67,13 +70,15 @@
         }
 
         .card {
-            background-color: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.10);
             padding: 2rem;
             margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.18);
         }
 
         .header {
@@ -82,15 +87,17 @@
             left: 0;
             width: 100%;
             padding: 1.5rem 2rem;
-            backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: var(--glass-blur);
+            background-color: rgba(255,255,255,0.5);
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, background-color 0.5s;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
         }
 
         .header.scrolled {
+            background-color: rgba(255,255,255,0.85);
             padding: 0.75rem 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
         }
 
         .nav-link {
@@ -140,22 +147,26 @@
         }
 
         .btn {
-            background: linear-gradient(135deg, var(--teal-medium), var(--accent));
+            background: linear-gradient(90deg, var(--teal-medium), var(--accent), #43e97b, #38f9d7);
+            background-size: 200% 200%;
             color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 500;
+            border-radius: 12px;
+            font-weight: 600;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
+            transition: all 0.3s ease, background-position 0.5s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             text-decoration: none;
-            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.2);
+            box-shadow: 0 5px 15px rgba(42,157,143,0.2);
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 157, 143, 0.3);
+            background-position: right center;
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 8px 24px rgba(42,157,143,0.3);
         }
 
         .skill-bar {
@@ -175,17 +186,19 @@
         }
 
         .project-card {
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            background-color: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
             height: 100%;
+            border: 1px solid rgba(255,255,255,0.18);
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
 
         .project-image {
@@ -368,6 +381,86 @@
                 transform: translateY(-10px) translateX(-50%);
             }
         }
+
+        /* Floating social bar */
+        .social-bar {
+            position: fixed;
+            top: 50%;
+            left: 24px;
+            transform: translateY(-50%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .social-bar a {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+        }
+
+        .social-bar a:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            right: 32px;
+            bottom: 32px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 3000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Typewriter effect for subtitle */
+        .typewriter {
+            display: inline-block;
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 2.5s steps(30, end), blink-caret 0.75s step-end infinite;
+            max-width: 100%;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent); }
+        }
     </style>
 </head>
 <body data-aos-easing="ease" data-aos-duration="800" data-aos-delay="0">
@@ -375,6 +468,13 @@
     <div class="bg-bubble bg-bubble-1"></div>
     <div class="bg-bubble bg-bubble-2"></div>
     <div class="bg-bubble bg-bubble-3"></div>
+
+    <!-- Floating Social Bar -->
+    <div class="social-bar">
+        <a href="https://www.linkedin.com/in/nitheeshd" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    </div>
 
     <!-- Header -->
     <header class="header">
@@ -398,16 +498,18 @@
 
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center pt-20" id="hero">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
+        <div class="container mx-auto px-4 relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-mint-light/60 to-teal-dark/80 pointer-events-none rounded-2xl z-0"></div>
+            <div class="flex flex-col md:flex-row items-center relative z-10">
                 <div class="md:w-1/2 mb-10 md:mb-0 aos-init aos-animate" data-aos="fade-right">
                     <h1 class="text-4xl md:text-6xl font-bold mb-4">Nitheesh Donepudi</h1>
-                    <h2 class="text-xl md:text-2xl text-white bg-accent inline-block px-4 py-2 rounded-lg mb-6">Full Stack Developer</h2>
+                    <h2 class="text-xl md:text-2xl text-white bg-accent inline-block px-4 py-2 rounded-lg mb-6 typewriter">Full Stack Developer | AI Enthusiast</h2>
                     <p class="text-lg mb-8 max-w-lg">As an ambitious Software Engineering graduate with a specialization in AI healthcare solutions, I create innovative systems that revolutionize patient care through intelligent automation.</p>
-                    <a href="https://page.genspark.site/page/toolu_011Z12RB9JijHAZhhzd6EXWE/nitheesh_mint_teal_portfolio.html#contact" class="btn">Get In Touch</a>
+                    <a href="#contact" class="btn"><i class="fas fa-paper-plane"></i>Get In Touch</a>
                 </div>
                 <div class="md:w-1/2 flex justify-center aos-init aos-animate" data-aos="fade-left">
-                    <img src="./index_files/ce47f09f-db1e-4d5d-a598-296b56081000" alt="Nitheesh Donepudi" class="profile-image w-64 h-64 md:w-80 md:h-80 object-cover">
+                    <!-- PROFILE PICTURE CODE LOCATION -->
+                    <img src="./index_files/4.jpg" alt="Nitheesh Donepudi" class="profile-image w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl">
                 </div>
             </div>
             <div class="scroll-indicator">
@@ -877,22 +979,18 @@
                                 <label for="name" class="block text-gray-700 mb-2">Name</label>
                                 <input type="text" id="name" class="contact-input" placeholder="Your Name">
                             </div>
-                            
                             <div class="mb-4">
                                 <label for="email" class="block text-gray-700 mb-2">Email</label>
                                 <input type="email" id="email" class="contact-input" placeholder="Your Email">
                             </div>
-                            
                             <div class="mb-4">
                                 <label for="subject" class="block text-gray-700 mb-2">Subject</label>
                                 <input type="text" id="subject" class="contact-input" placeholder="Subject">
                             </div>
-                            
                             <div class="mb-6">
                                 <label for="message" class="block text-gray-700 mb-2">Message</label>
                                 <textarea id="message" rows="5" class="contact-input" placeholder="Your Message"></textarea>
                             </div>
-                            
                             <button type="submit" class="btn w-full">Send Message</button>
                         </form>
                     </div>
